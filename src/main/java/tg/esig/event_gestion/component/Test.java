@@ -30,9 +30,9 @@ public class Test {
      //   Utilisateur utilisateurSave = utilisateurRepository.save(utilisateur);
       //  System.out.println("Utilisateur inserer" + utilisateurSave);
         Utilisateur utilisateur = utilisateurRepository.findNom("SALOU");
-       // utilisateur.setAge(20);
+        utilisateur.setAge(20);
 
-      //  Utilisateur utilisateur1 = utilisateurRepository.save((utilisateur));
+        //Utilisateur utilisateur1 = utilisateurRepository.save((utilisateur));
 
         System.out.println("utilisateur afficher: "+utilisateur);
 

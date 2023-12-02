@@ -18,7 +18,7 @@ public class Utilisateur {
     public Utilisateur(){
 
     }
-    public Utilisateur(long id,String nom,String prenom,Integer age,String location){
+    public Utilisateur(Long id,String nom,String prenom,Integer age,String location){
         this.id= id;
         this.nom= nom;
         this.prenom= prenom;
@@ -56,6 +56,10 @@ public class Utilisateur {
     //setters
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setPrenom(String prenom) {

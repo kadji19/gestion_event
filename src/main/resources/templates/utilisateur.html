@@ -104,6 +104,10 @@
             <h3 align="center" style="color: #8b211e">Saisie Validée avec succès</h3>
         </div>
 
+        <div th:if="${save_update}" class="alert alert-success">
+            <h3 align="center" style="color: #8b211e">Mise à jour effectué avec succès</h3>
+        </div>
+
         <div th:if="${save_error}" class="alert alert-danger">
             <h3 align="center" style="color: #8b211e">Echec saisie </h3>
         </div>
@@ -170,7 +174,7 @@
                                 <th data-column-id="prenom" ><b>prenom</b></th>
                                 <th data-column-id="age" ><b>age</b></th>
                                 <th data-column-id="location" ><b>location</b></th>
-                                <!-- <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commandes</th>-->
+                                 <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commandes</th>
 
                                  <!--<th data-column-id="commands" data-formatter="commands" data-sortable="false">Commandes</th>-->
 
@@ -208,16 +212,27 @@
                                 <h4 style="color : red"><b>Cette action va éditer les informations.</b></h4>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="row col-sm-3">
-                                <input type="text" name="medicamentupdate" class="form-control input-sm fileds" id="medupdate" placeholder="Saisir le medicament" >
+                            <div class="row">
+                                <div class="row col-sm-3">
+                                    <input type="text" name="nomupdate" class="form-control input-sm fileds" id="nomupdate" placeholder="Saisir le nom" >
+                                </div>
+                                <div class="row col-sm-2">
+                                </div>
+                                <div class="row col-sm-3">
+                                    <input type="text" name="prenomupdate" class="form-control input-sm fileds" id="prenomupdate" placeholder="Saisir prenom" >
+                                </div>
                             </div>
-                            <div class="row col-sm-2">
+                            <br/>
+                            <div class="row">
+                                <div class="row col-sm-3">
+                                    <input type="number" name="ageupdate" class="form-control input-sm fileds" id="ageupdate" placeholder="Saisir votre age" >
+                                </div>
+                                <div class="row col-sm-2">
+                                </div>
+                                <div class="row col-sm-3">
+                                    <input type="text" name="locationupdate" class="form-control input-sm fileds" id="locationupdate" placeholder="Saisir location" >
+                                </div>
                             </div>
-                            <div class="row col-sm-3">
-                                <input type="text" name="typeupdate" class="form-control input-sm fileds" id="typeupdate" placeholder="Saisir type" >
-                            </div>
-                        </div>
                         <div class="row">
 
                         </div>
@@ -246,7 +261,7 @@
                     <div class="modal-header">
                         <h4 class="modal-title">Confirmation de la suppression</h4>
                     </div>
-                    <input type="text" id="delcoded" name="coded"/>
+                    <input type="text" id="delcoded" name="coded" hidden="hidden"/>
                     <div class="card-body card-padding">
                         <div class="row">
                             <div class="col-sm-12 m-b-20">
@@ -301,13 +316,13 @@
 
 
     $('#yesEdit').click(function () {
-        window.location.href='/update?dsignation='+$('#medupdate').val() + '&type='+$('#typeupdate').val() + '&olddesignation='+$('#coded').val();
+        window.location.href='/updateUtilisateur?id='+$('#coded').val() + '&nom='+$('#nomupdate').val() + '&prenom='+$('#prenomupdate').val() + '&age='+$('#ageupdate').val() + '&location='+$('#locationupdate').val();
 
 
     });
 
     $('#yesDelete').click(function () {
-        window.location.href='/delete?id_med='+$('#delcoded').val();
+        window.location.href='/deleteUtilisateur?id='+$('#delcoded').val();
 
 
     });

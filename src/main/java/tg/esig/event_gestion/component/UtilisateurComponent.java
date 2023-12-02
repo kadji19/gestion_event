@@ -38,4 +38,7 @@ public class UtilisateurComponent {
         }
         return utilisateurSave;
     }
+    public void deleteUtilisateur(Long id){
+        utilisateurRepository.deleteById(id);
+    }
 }
