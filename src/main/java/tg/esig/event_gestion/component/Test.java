@@ -54,6 +54,8 @@ public class Test {
         return utilisateurs.toString();
     }
 
+
+
     public List<Utilisateur> getInfo(){
         List<Utilisateur> utilisateurs= utilisateurRepository.findAll();
         return utilisateurs;
