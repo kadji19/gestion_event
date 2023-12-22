@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Gestion utilisateur</title>
+    <title>Gestion Attribution</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link th:href="@{/css/material-design-iconic-font.min.css}" rel="stylesheet">
     <link th:href="@{/css/app.min.1.css}" rel="stylesheet">
@@ -28,7 +28,7 @@
         </li>
 
         <li class="logo hidden-xs">
-            <a><b>Application Gestion d'evenement </b></a>
+            <a><b>Application Gestion d'attribution </b></a>
         </li>
 
         <li class="pull-right">
@@ -118,7 +118,7 @@
 
         <div class="card">
             <div class="card-header bgm-bluegray" align="center" height="300px" width="100">
-                <h2>Interface de Gestions des Evenements</h2>
+                <h2>Interface de Gestions d'attribution des Evenements aux Utilisateurs</h2>
 
             </div>
         </div>
@@ -129,71 +129,73 @@
         <br/>
     <div class="box-body">
         <div class="box box-primary">
-             <div class="card-body card-padding">
-              <form th:action="@{/inserteEvenement}" enctype="multipart/form-data" th:method="post">
-                    <div class="row">
+            <div class="card-body card-padding">
+                <!--  <form th:action="@{/insertAttribution}" enctype="multipart/form-data" th:method="post">-->
+                     <!--   <div class="row">
+                       <div class="row col-sm-3">
+                       <input type="text" name="nom" class="form-control input-sm fileds" id="nom" placeholder="Saisir le nom de l'evenemet" >
+                       </div>
+                       <div class="row col-sm-2">
+                       </div>
+                       <div class="row col-sm-3">
+                           <input type="text" name="eventname" class="form-control input-sm fileds" id="eventname" placeholder="Saisir l'auther" >
+                       </div>
+                       </div>
+                       <br/>
+                        <div class="row">
+                            <div class="row col-sm-3">
+                                <input type="text" name="eventdate" class="form-control input-sm fileds" id="eventdate" placeholder="Saisir la date de l'evenement" >
+                            </div>
+                            <div class="row col-sm-2">
+                            </div>
+                            <div class="row col-sm-3">
+                                <input type="text" name="eventplace" class="form-control input-sm fileds" id="eventplace" placeholder="Saisir le lieu de l'evenement" >
+                            </div>
+                        </div>-->
+                <div class="row">
+                    <select id="utilisateur" data-live-search="true" name="utilisateur">
+                        <option th:each="utilisateur:${personne}" th:value="${utilisateur.id}" th:text="${utilisateur.nom}" th:selected="${utilisateur.id == 1}"></option>
+                    </select>
+                    <select id="evenement" data-live-search="true" name="evenement">
+                        <option th:each="evenement:${event}" th:value="${evenement.id}" th:text="${evenement.eventname}" th:selected="${evenement.id == 1}"></option>
+                    </select>
+                </div>
+
+                <br/>
+                <div class="row">
                     <div class="row col-sm-3">
-                    <input type="text" name="eventname" class="form-control input-sm fileds" id="eventname" placeholder="Saisir le nom de l'evenemet" >
+                        <button class="btn btn-primary" id="sauve" type="submit">Enregistrer </button>
+                        <br/>
                     </div>
-                    <div class="row col-sm-2">
-                    </div>
-                    <div class="row col-sm-3">
-                        <input type="text" name="author" class="form-control input-sm fileds" id="author" placeholder="Saisir l'auteur" >
-                    </div>
-                    </div>
-                    <br/>
-                 <div class="row">
-                     <div class="row col-sm-3">
-                         <input type="date" name="eventdate" class="form-control input-sm fileds" id="eventdate" placeholder="Saisir la date de l'evenement" >
-                     </div>
-                     <div class="row col-sm-2">
-                     </div>
-                     <div class="row col-sm-3">
-                         <input type="text" name="eventplace" class="form-control input-sm fileds" id="eventplace" placeholder="Saisir le lieu de l'evenement" >
-                     </div>
-                 </div>
-                  <div class="row">
-                      <select id="utilisateur" data-live-search="true" name="utilisateur">
-                          <option th:each="utilisateur:${personne}" th:value="${utilisateur.id}" th:text="${utilisateur.nom}" th:selected="${utilisateur.id == 1}"></option>
-                      </select>
-                  </div>
+                </div>
+                <br/>
+                <br/>
+                <!--   </form>-->
+                           <div>
 
-                 <br/>
-                    <div class="row">
-                    <div class="row col-sm-3">
-                    <button class="btn btn-primary" id="sauving" type="submit">Enregistrer </button>
-                    <br/>
-                    </div>
-                    </div>
-                     <br/>
-                     <br/>
-              </form>
-                    <div>
+                           </div>
 
-                    </div>
+                           <div  class="table-responsive">
+                               <table id="data-table-command" class="table table-striped table-vmiddle">
+                                   <thead>
+                                   <tr >
+                                       <th data-column-id="id" data-visible="false">ID</th>
+                                       <th data-column-id="eventname"> Utilisateur</th>
+                                       <th data-column-id="author" ><b>Evenement</b></th>
+                                        <th data-column-id="eventdate" ><b>Statut</b></th>
+                                       <!-- <th data-column-id="eventplace" ><b>Lieu de l'evenement</b></th>-->
+                                        <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commandes</th>
 
-                    <div  class="table-responsive">
-                        <table id="data-table-command" class="table table-striped table-vmiddle">
-                            <thead>
-                            <tr >
-                                <th data-column-id="id" data-visible="false">ID</th>
-                                <th data-column-id="eventname"> Nom de l'evenement</th>
-                                <th data-column-id="author" ><b>Auther</b></th>
-                                <th data-column-id="eventdate" ><b>Date de l'evenement</b></th>
-                                <th data-column-id="eventplace" ><b>Lieu de l'evenement</b></th>
-                                 <th data-column-id="commands" data-formatter="commands" data-sortable="false">Commandes</th>
-
-                                 <!--<th data-column-id="commands" data-formatter="commands" data-sortable="false">Commandes</th>-->
+                                        <!--<th data-column-id="commands" data-formatter="commands" data-sortable="false">Commandes</th>-->
 
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="det: ${listEvenements}">
+                            <tr th:each="det: ${listAttributions}">
                                 <td th:text="${det.id }"></td>
-                                <td th:text="${det.eventname}"></td>
-                                <td th:text="${det.author}"></td>
-                                <td th:text="${det.eventdate}"></td>
-                                <td th:text="${det.eventplace}"></td>
+                                <td th:text="${det.utilisateur.nom }"></td>
+                                <td th:text="${det.evenement.eventname }"></td>
+                                <td th:text="${det.statut}"></td>
 
                             </tr>
                             </tbody>
@@ -221,23 +223,23 @@
                         </div>
                             <div class="row">
                                 <div class="row col-sm-3">
-                                    <input type="text" name="eventnameupdate" class="form-control input-sm fileds" id="eventnameupdate" placeholder="Saisir le nom de l'evenemet" >
+                                    <input type="text" name="nomupdate" class="form-control input-sm fileds" id="nomupdate" placeholder="Saisir le nom" >
                                 </div>
                                 <div class="row col-sm-2">
                                 </div>
                                 <div class="row col-sm-3">
-                                    <input type="text" name="authorupdate" class="form-control input-sm fileds" id="authorupdate" placeholder="Saisir l'auteur" >
+                                    <input type="text" name="prenomupdate" class="form-control input-sm fileds" id="prenomupdate" placeholder="Saisir prenom" >
                                 </div>
                             </div>
                             <br/>
                             <div class="row">
                                 <div class="row col-sm-3">
-                                    <input type="date" name="eventdateupdate" class="form-control input-sm fileds" id="eventdateupdate" placeholder="Saisir la date de l'evenement" >
+                                    <input type="number" name="ageupdate" class="form-control input-sm fileds" id="ageupdate" placeholder="Saisir votre age" >
                                 </div>
                                 <div class="row col-sm-2">
                                 </div>
                                 <div class="row col-sm-3">
-                                    <input type="text" name="eventplaceupdate" class="form-control input-sm fileds" id="eventplaceupdate" placeholder="Saisir le lieu de l'evenement" >
+                                    <input type="text" name="locationupdate" class="form-control input-sm fileds" id="locationupdate" placeholder="Saisir location" >
                                 </div>
                             </div>
                         <div class="row">
@@ -315,7 +317,7 @@
     $('#sauve').click(function() {
 
      //alert("ok");
-            window.location.href='/insertUtilisateur?nom='+$('#nom').val() + '&prenom='+$('#prenom').val() + '&age='+$('#age').val() + '&location='+$('#location').val();
+            window.location.href='/insertAttribution?utilisateur_id='+$('#utilisateur').val() + '&evenement_id='+$('#evenement').val();
 
 
         }
@@ -323,13 +325,13 @@
 
 
     $('#yesEdit').click(function () {
-        window.location.href='/updateEvenement?id='+$('#coded').val() + '&eventname='+$('#eventnameupdate').val() + '&author='+$('#authorupdate').val() + '&eventdate='+$('#eventdateupdate').val() + '&eventplace='+$('#eventplaceupdate').val();
+        window.location.href='/updateUtilisateur?id='+$('#coded').val() + '&nom='+$('#nomupdate').val() + '&prenom='+$('#prenomupdate').val() + '&age='+$('#ageupdate').val() + '&location='+$('#locationupdate').val();
 
 
     });
 
     $('#yesDelete').click(function () {
-        window.location.href='/deleteEvenement?id='+$('#delcoded').val();
+        window.location.href='/deleteUtilisateur?id='+$('#delcoded').val();
 
 
     });

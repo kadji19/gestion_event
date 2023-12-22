@@ -41,4 +41,10 @@ public class UtilisateurComponent {
     public void deleteUtilisateur(Long id){
         utilisateurRepository.deleteById(id);
     }
+
+
+    public Utilisateur getUtilisateurById(Long id) {
+        Optional<Utilisateur> utilisateurOptional = utilisateurRepository.findById(id);
+        return utilisateurOptional.orElse(null);
+    }
 }
